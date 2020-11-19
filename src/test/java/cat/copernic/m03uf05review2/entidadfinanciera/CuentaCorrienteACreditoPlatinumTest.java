@@ -16,11 +16,11 @@ import static org.junit.Assert.*;
  *
  * @author david
  */
-public class CuentaCorrienteADebitoTest {
+public class CuentaCorrienteACreditoPlatinumTest {
     
-    private CuentaCorrienteADebito instance;
+    private CuentaCorrienteACreditoPlatinum instance;
     
-    public CuentaCorrienteADebitoTest() {
+    public CuentaCorrienteACreditoPlatinumTest() {
     }
     
     @BeforeClass
@@ -33,7 +33,7 @@ public class CuentaCorrienteADebitoTest {
     
     @Before
     public void setUp() {
-        instance = new CuentaCorrienteADebito("David", 500.00);
+        instance = new CuentaCorrienteACreditoPlatinum("David", 500.00);
     }
     
     @After
@@ -42,29 +42,24 @@ public class CuentaCorrienteADebitoTest {
     }
 
     /**
-     * Test of abona method, of class CuentaCorrienteADebito
+     * Test of abona method, of class CuentaCorrienteACreditoPlatinum
      */
     @Test
     public void testAbona() {
         double abono = 200.0;
-        //double abono = 600.0;
         instance.abona(abono);
-        
         assertEquals(300.00, instance.getSaldo(), 0.01);
-        //assertEquals(-100.00, instance.getSaldo(), 0.01);
+        
     }
 
     /**
-     * Test of ingresa method, of class CuentaCorrienteADebito
+     * Test of ingresa method, of class CuentaCorrienteACreditoPlatinum
      */
     @Test
     public void testIngresa() {
-        
-        double ingreso = 1000.0;
-        //double ingreso = 3100.0;
+        double ingreso = 9000.0;
         instance.ingresa(ingreso);
-        assertEquals(1500.00, instance.getSaldo(), 0.01);
-        //assertEquals(3600.00, instance.getSaldo(), 0.01);
+        assertEquals(9500.00, instance.getSaldo(), 0.01);
         
     }
     

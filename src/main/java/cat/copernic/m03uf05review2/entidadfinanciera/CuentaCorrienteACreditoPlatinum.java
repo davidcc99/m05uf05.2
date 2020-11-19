@@ -15,28 +15,42 @@ public class CuentaCorrienteACreditoPlatinum extends CuentaCorrienteACredito {
         super(titular, saldo);
     }
 
-    /**
-     * Esta cuenta permite una descubierto de hasta 5000 €, si es más lanza una
-     * exception
-     *
-     * @param abono
-     */
     @Override
     public void abona(double abono) {
-        double saldoCuenta = CuentaCorrienteACreditoPlatinum.super.getSaldo();
-        
-        
-        if(saldoCuenta > -5000){
-                saldoCuenta = saldoCuenta - abono;
-        }
-        else {
-            try{
-                throw new Exception("El saldo de la cuenta no puede pasar de los -5000 negativos");
-            }
-            catch(Exception e){
+        double saldo = CuentaCorrienteACreditoPlatinum.super.getSaldo();
+
+
+        if (saldo <= -5000) {
+            try {
+                throw new Exception("El descubierto máximo es de 5000");
+            } 
+            catch (Exception e) {
                 e.printStackTrace();
             }
+        } 
+        else {
+            CuentaCorrienteACreditoPlatinum.super.setSaldo(saldo - abono);
         }
+
+    }
+    
+    @Override
+    public void ingresa(double ingreso){
+        
+        double saldo = CuentaCorrienteACreditoPlatinum.super.getSaldo();
+        
+        if (ingreso > 10000) {
+            try {
+                throw new Exception("Se permite ingresar maximo 10000 por operación");
+            } 
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+        } 
+        else {
+            CuentaCorrienteACreditoPlatinum.super.setSaldo(saldo + ingreso);
+        }
+        
     }
 
 }

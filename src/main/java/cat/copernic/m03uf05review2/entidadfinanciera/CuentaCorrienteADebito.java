@@ -15,27 +15,41 @@ public class CuentaCorrienteADebito extends CuentaCorritenteImpl {
         super(titular, saldo);
     }
 
-    /**
-     * 
-     * Solamente se da un abono si hay saldo, si no se lanza una exception
-     * 
-     * @param abono 
-     */
     @Override
     public void abona(double abono) {
-        double saldoCuenta = CuentaCorrienteADebito.super.getSaldo();
-        
-        if(saldoCuenta > 0){
-                saldoCuenta = saldoCuenta - abono;
-        }
-        else {
-            try{
-                throw new Exception("El saldo de la cuenta no puede ser negativo");
-            }
-            catch(Exception e){
+        double saldo = CuentaCorrienteADebito.super.getSaldo();
+
+
+        if (saldo <= 0) {
+            try {
+                throw new Exception("No hay saldo");
+            } 
+            catch (Exception e) {
                 e.printStackTrace();
             }
+        } 
+        else {
+            CuentaCorrienteADebito.super.setSaldo(saldo - abono);
         }
+
     }
     
+    @Override
+    public void ingresa(double ingreso){
+        
+        double saldo = CuentaCorrienteADebito.super.getSaldo();
+        
+        if (ingreso > 3000) {
+            try {
+                throw new Exception("Se permite ingresar maximo 3000 por operación");
+            } 
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+        } 
+        else {
+            CuentaCorrienteADebito.super.setSaldo(saldo + ingreso);
+        }   
+    }    
 }
+    
